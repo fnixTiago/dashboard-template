@@ -6,7 +6,7 @@ import Dashboard from "../Dashboard/Dashboard"
 import Contacts from "../Dashboard/Contacts/Contacts"
 import Inscritos from "../Dashboard/Inscritos/Inscritos"
 import Users from "../Dashboard/Users/Users"
-import Page404 from "../Page404/Page404"
+import Page404 from "../pages/Page404/Page404"
 import PrivateLayout from "../components/layout/PrivateLayout";
 import RootLayout from "../components/layout/RootLayout";
 export default function Router() {
@@ -17,6 +17,10 @@ export default function Router() {
             children: [
                 {
                     index: true,
+                    element: <LoginPage />
+                },
+                {
+                    path: "login",
                     element: <LoginPage />
                 },
                 {

@@ -4,9 +4,12 @@ import { useRedirectActiveUser } from '../../hooks/useRedirectActiveUser';
 import { useUserContext } from '../../context/UserContext';
 import { db, register } from '../../config/firebase';
 import "./register.css"
+import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 
 const RegisterPage = () => {
+  let now = moment().format();
   const [datos, setDatos] = useState({
     name: '',
     surname: '',
@@ -41,7 +44,8 @@ const RegisterPage = () => {
       await register(datos)
         .then(response => {
           const id = response?.user?.auth?.currentUser?.uid
-          let data = { ...datos }
+          let data = { ...datos,
+          date: now }
           delete data.password
           setDoc(doc(db, "users", id), data);
         })
@@ -61,6 +65,7 @@ const RegisterPage = () => {
   return (
     <div>
       <h2>Register</h2>
+     
       <form onSubmit={handleSubmit}>
         <input
           required
@@ -101,6 +106,7 @@ const RegisterPage = () => {
           type='submit'
         >{loading ? "...loading" : "Register"}</button>
       </form>
+      
     </div>
   )
 }
